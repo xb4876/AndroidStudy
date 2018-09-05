@@ -11,6 +11,9 @@ import com.kenai.jffi.Main;
 import com.study.ethwallet.R;
 import com.study.ethwallet.WalletApplication;
 import com.study.ethwallet.entity.ETHWallet;
+import com.study.ethwallet.util.WalletUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +63,9 @@ public class CreateWalletActivity extends BaseActivity {
                 ETHWallet ethWallet = new ETHWallet();
                 ethWallet.setName(name);
                 ethWallet.setPassword(pwd);
+                String mnemonics = WalletUtil.generateMnemonic();
+                ethWallet.setMnemonic(mnemonics);
+
                 WalletApplication.setWallet(ethWallet);
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
