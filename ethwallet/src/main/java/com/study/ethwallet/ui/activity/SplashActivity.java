@@ -1,11 +1,14 @@
 package com.study.ethwallet.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.study.ethwallet.R;
+import com.study.ethwallet.WalletApplication;
+import com.study.ethwallet.entity.ETHWallet;
 import com.study.ethwallet.ui.view.SplashView;
 
 public class SplashActivity extends BaseActivity {
@@ -34,8 +37,17 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onSplashViewDismiss(boolean initiativeDismiss) {
-                Toast.makeText(SplashActivity.this, "img clicked123.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SplashActivity.this, "img clicked123.", Toast.LENGTH_SHORT).show();
                 Log.d("SplashView", "dismissed, initiativeDismiss: " + initiativeDismiss);
+                ETHWallet wallet = WalletApplication.getWallet();
+                if(wallet == null) {
+                    Intent intent = new Intent(getApplicationContext(), NoWalletActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+                finish();
             }
         });
 
